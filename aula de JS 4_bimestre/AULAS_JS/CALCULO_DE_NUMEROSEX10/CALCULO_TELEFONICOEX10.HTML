@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatador de Telefone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        button {
+            background: #9C27B0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-height: 20px;
+            font-size: 18px;
+        }
+        
+        .formatado {
+            background-color: #F3E5F5;
+            color: #7B1FA2;
+            border: 2px solid #9C27B0;
+        }
+        
+        .invalido {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+        
+        .info {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Formatador de Telefone</h2>
+    <p>Digite um número de 8 dígitos</p>
+    
+    <input type="text" id="telefone" placeholder="Ex: 99887766" maxlength="8">
+    <button onclick="formatar()">Formatar Telefone</button>
+    
+    <div class="info">
+        <strong>Como funciona:</strong><br>
+        A função recebe um número de 8 dígitos<br>
+        Retorna formatado como "XXXX-XXXX"
+    </div>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function formatarTelefone(numero) {
+            // Pega os primeiros 4 dígitos
+            const parte1 = numero.slice(0, 4);
+            // Pega os últimos 4 dígitos
+            const parte2 = numero.slice(4, 8);
+            // Retorna formatado
+            return parte1 + "-" + parte2;
+        }
+        
+        function formatar() {
+            const telefone = document.getElementById('telefone').value;
+            const resultado = document.getElementById('resultado');
+            
+            // Verifica se tem exatamente 8 dígitos
+            if (telefone.length !== 8) {
+                resultado.textContent = "Digite exatamente 8 dígitos";
+                resultado.className = "invalido";
+                return;
+            }
+            
+            // Verifica se são apenas números
+            if (!/^\d+$/.test(telefone)) {
+                resultado.textContent = "Digite apenas números";
+                resultado.className = "invalido";
+                return;
+            }
+            
+            const telefoneFormatado = formatarTelefone(telefone);
+            resultado.textContent = telefoneFormatado;
+            resultado.className = "formatado";
+        }
+        
+        // Enter para formatar
+        document.getElementById('telefone').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                formatar();
+            }
+        });
+        
+        // Permite apenas números no input
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, '');
+        });
+    </script>
+</body>
+</html>

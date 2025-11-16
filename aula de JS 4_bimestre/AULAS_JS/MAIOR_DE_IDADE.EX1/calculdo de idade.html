@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pode Dirigir?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .pode {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .nao-pode {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Posso Dirigir?</h1>
+        <p>Informe sua data de nascimento para verificar</p>
+        
+        <input type="date" id="dataNascimento">
+        <button onclick="verificar()">Verificar</button>
+        
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        function verificar() {
+            const dataNascimento = new Date(document.getElementById('dataNascimento').value);
+            const hoje = new Date();
+            
+            // Calcula a idade
+            let idade = hoje.getFullYear() - dataNascimento.getFullYear();
+            
+            // Ajusta se ainda não fez aniversário este ano
+            if (hoje.getMonth() < dataNascimento.getMonth() || 
+                (hoje.getMonth() === dataNascimento.getMonth() && hoje.getDate() < dataNascimento.getDate())) {
+                idade--;
+            }
+            
+            const resultado = document.getElementById('resultado');
+            
+            if (idade >= 18) {
+                resultado.textContent = "PODE dirigir!";
+                resultado.className = "pode";
+            } else {
+                resultado.textContent = "NÃO PODE dirigir!";
+                resultado.className = "nao-pode";
+            }
+        }
+        
+        // Define a data máxima como hoje
+        window.onload = function() {
+            const hoje = new Date().toISOString().split('T')[0];
+            document.getElementById('dataNascimento').max = hoje;
+        };
+    </script>
+</body>
+</html>

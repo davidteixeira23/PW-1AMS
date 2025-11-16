@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipo de Triângulo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        
+        .equilatero {
+            background-color: #E8F5E8;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+        
+        .isosceles {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border: 2px solid #2196F3;
+        }
+        
+        .escaleno {
+            background-color: #FFF3E0;
+            color: #EF6C00;
+            border: 2px solid #FF9800;
+        }
+        
+        .invalido {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+        
+        .info {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tipo de Triângulo</h2>
+    <p>Digite os três lados do triângulo</p>
+    
+    <input type="number" id="lado1" placeholder="Lado 1">
+    <input type="number" id="lado2" placeholder="Lado 2">
+    <input type="number" id="lado3" placeholder="Lado 3">
+    
+    <button onclick="verificarTriangulo()">Verificar Tipo</button>
+    
+    <div class="info">
+        <strong>Tipos de Triângulo:</strong><br>
+        🔺 Equilátero → Todos os lados iguais<br>
+        🔺 Isósceles → Dois lados iguais<br>
+        🔺 Escaleno → Todos os lados diferentes
+    </div>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function tipoTriangulo(l1, l2, l3) {
+            // Verifica se é equilátero (todos iguais)
+            if (l1 == l2 && l2 == l3) {
+                return "Equilátero";
+            }
+            // Verifica se é isósceles (dois iguais)
+            else if (l1 == l2 || l1 == l3 || l2 == l3) {
+                return "Isósceles";
+            }
+            // Se não é nenhum dos acima, é escaleno
+            else {
+                return "Escaleno";
+            }
+        }
+        
+        function verificarTriangulo() {
+            const l1 = parseFloat(document.getElementById('lado1').value);
+            const l2 = parseFloat(document.getElementById('lado2').value);
+            const l3 = parseFloat(document.getElementById('lado3').value);
+            
+            const resultado = document.getElementById('resultado');
+            
+            // Verifica se todos os campos foram preenchidos
+            if (isNaN(l1) || isNaN(l2) || isNaN(l3)) {
+                resultado.textContent = "Digite todos os três lados";
+                resultado.className = "invalido";
+                return;
+            }
+            
+            // Verifica se os lados formam um triângulo válido
+            if (l1 <= 0 || l2 <= 0 || l3 <= 0) {
+                resultado.textContent = "Os lados devem ser maiores que zero";
+                resultado.className = "invalido";
+                return;
+            }
+            
+            // Verifica a desigualdade triangular
+            if (l1 + l2 <= l3 || l1 + l3 <= l2 || l2 + l3 <= l1) {
+                resultado.textContent = "Estes lados não formam um triângulo válido";
+                resultado.className = "invalido";
+                return;
+            }
+            
+            const tipo = tipoTriangulo(l1, l2, l3);
+            resultado.textContent = `Triângulo ${tipo}`;
+            
+            if (tipo === "Equilátero") {
+                resultado.className = "equilatero";
+            } else if (tipo === "Isósceles") {
+                resultado.className = "isosceles";
+            } else {
+                resultado.className = "escaleno";
+            }
+        }
+        
+        // Enter para verificar
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verificarTriangulo();
+            }
+        });
+    </script>
+</body>
+</html>

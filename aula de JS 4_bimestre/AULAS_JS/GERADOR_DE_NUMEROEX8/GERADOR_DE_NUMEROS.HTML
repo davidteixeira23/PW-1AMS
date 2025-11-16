@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Nome Completo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-height: 20px;
+            font-size: 18px;
+        }
+        
+        .nome-completo {
+            background-color: #E8F5E8;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+        
+        .invalido {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+        
+        .info {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Gerador de Nome Completo</h2>
+    <p>Digite seu primeiro nome e sobrenome</p>
+    
+    <input type="text" id="primeiroNome" placeholder="Primeiro nome">
+    <input type="text" id="sobrenome" placeholder="Sobrenome">
+    
+    <button onclick="gerarNome()">Gerar Nome Completo</button>
+    
+    <div class="info">
+        <strong>Como funciona:</strong><br>
+        A função recebe um objeto com primeiroNome e sobrenome<br>
+        Retorna o nome completo concatenado
+    </div>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function gerarNomeCompleto(pessoa) {
+            return pessoa.primeiroNome + " " + pessoa.sobrenome;
+        }
+        
+        function gerarNome() {
+            const primeiroNome = document.getElementById('primeiroNome').value.trim();
+            const sobrenome = document.getElementById('sobrenome').value.trim();
+            
+            const resultado = document.getElementById('resultado');
+            
+            // Verifica se os campos foram preenchidos
+            if (!primeiroNome || !sobrenome) {
+                resultado.textContent = "Digite o primeiro nome e sobrenome";
+                resultado.className = "invalido";
+                return;
+            }
+            
+            // Cria o objeto pessoa
+            const pessoa = {
+                primeiroNome: primeiroNome,
+                sobrenome: sobrenome
+            };
+            
+            // Gera o nome completo
+            const nomeCompleto = gerarNomeCompleto(pessoa);
+            resultado.textContent = nomeCompleto;
+            resultado.className = "nome-completo";
+        }
+        
+        // Enter para gerar nome
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                gerarNome();
+            }
+        });
+        
+        // Foca no primeiro campo ao carregar a página
+        window.onload = function() {
+            document.getElementById('primeiroNome').focus();
+        };
+    </script>
+</body>
+</html>

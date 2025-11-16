@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de Dia da Semana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #9C27B0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        
+        .dia-util {
+            background-color: #F3E5F5;
+            color: #7B1FA2;
+            border: 2px solid #9C27B0;
+        }
+        
+        .fim-semana {
+            background-color: #E8F5E8;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+        
+        .invalido {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+        
+        .info {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Classificador de Dia da Semana</h2>
+    <p>Digite um número de 1 a 7</p>
+    
+    <input type="number" id="numeroDia" placeholder="Digite 1 a 7" min="1" max="7">
+    <button onclick="classificarDia()">Descobrir Dia</button>
+    
+    <div class="info">
+        <strong>Dias da Semana:</strong><br>
+        1 - Domingo<br>
+        2 - Segunda-feira<br>
+        3 - Terça-feira<br>
+        4 - Quarta-feira<br>
+        5 - Quinta-feira<br>
+        6 - Sexta-feira<br>
+        7 - Sábado
+    </div>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function nomeDoDia(numero) {
+            if (numero === 1) {
+                return "Domingo";
+            } else if (numero === 2) {
+                return "Segunda-feira";
+            } else if (numero === 3) {
+                return "Terça-feira";
+            } else if (numero === 4) {
+                return "Quarta-feira";
+            } else if (numero === 5) {
+                return "Quinta-feira";
+            } else if (numero === 6) {
+                return "Sexta-feira";
+            } else if (numero === 7) {
+                return "Sábado";
+            } else {
+                return "Número inválido";
+            }
+        }
+        
+        function classificarDia() {
+            const numero = parseInt(document.getElementById('numeroDia').value);
+            const resultado = document.getElementById('resultado');
+            
+            const dia = nomeDoDia(numero);
+            resultado.textContent = dia;
+            
+            if (dia === "Número inválido") {
+                resultado.className = "invalido";
+            } else if (numero === 1 || numero === 7) {
+                resultado.className = "fim-semana";
+            } else {
+                resultado.className = "dia-util";
+            }
+        }
+        
+        // Enter para verificar
+        document.getElementById('numeroDia').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                classificarDia();
+            }
+        });
+    </script>
+</body>
+</html>

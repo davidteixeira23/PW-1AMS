@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de Moedas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #FFD700;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        
+        .moeda {
+            background-color: #FFF9C4;
+            color: #5D4037;
+            border: 2px solid #FFD700;
+        }
+        
+        .desconhecido {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #FFCDD2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Classificador de Moedas</h2>
+    <p>Digite o valor da moeda (ex: 0.05, 0.10, 0.25, 0.50, 1.00)</p>
+    
+    <input type="number" id="valorMoeda" placeholder="Ex: 0.10, 0.25, 1.00" step="0.01">
+    <button onclick="classificar()">Classificar Moeda</button>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function classificarMoeda(valor) {
+            if (valor === 0.01) {
+                return "1 Centavo";
+            } else if (valor === 0.05) {
+                return "5 Centavos";
+            } else if (valor === 0.10) {
+                return "10 Centavos";
+            } else if (valor === 0.25) {
+                return "25 Centavos";
+            } else if (valor === 0.50) {
+                return "50 Centavos";
+            } else if (valor === 1.00) {
+                return "1 Real";
+            } else {
+                return "Valor Desconhecido";
+            }
+        }
+        
+        function classificar() {
+            const valor = parseFloat(document.getElementById('valorMoeda').value);
+            const resultado = document.getElementById('resultado');
+            
+            if (isNaN(valor)) {
+                resultado.textContent = "Digite um valor válido";
+                resultado.className = "desconhecido";
+                return;
+            }
+            
+            const classificacao = classificarMoeda(valor);
+            resultado.textContent = classificacao;
+            
+            if (classificacao === "Valor Desconhecido") {
+                resultado.className = "desconhecido";
+            } else {
+                resultado.className = "moeda";
+            }
+        }
+        
+        // Enter para classificar
+        document.getElementById('valorMoeda').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                classificar();
+            }
+        });
+    </script>
+</body>
+</html>

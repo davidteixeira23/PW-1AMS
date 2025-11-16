@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Média</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        
+        .aprovado {
+            background-color: #E8F5E8;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+        
+        .reprovado {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+        
+        .invalido {
+            background-color: #FFF3E0;
+            color: #EF6C00;
+            border: 2px solid #FF9800;
+        }
+        
+        .info {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Calculadora de Média</h2>
+    <p>Digite as duas notas</p>
+    
+    <input type="number" id="nota1" placeholder="Nota 1" min="0" max="10" step="0.1">
+    <input type="number" id="nota2" placeholder="Nota 2" min="0" max="10" step="0.1">
+    
+    <button onclick="calcularMedia()">Calcular Média</button>
+    
+    <div class="info">
+        <strong>Critério:</strong><br>
+        ✅ Média ≥ 7 → Aprovado<br>
+        ❌ Média < 7 → Reprovado
+    </div>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function calcularMediaSimples(n1, n2) {
+            const media = (n1 + n2) / 2;
+            
+            if (media >= 7) {
+                return "Aprovado";
+            } else {
+                return "Reprovado";
+            }
+        }
+        
+        function calcularMedia() {
+            const n1 = parseFloat(document.getElementById('nota1').value);
+            const n2 = parseFloat(document.getElementById('nota2').value);
+            
+            const resultado = document.getElementById('resultado');
+            
+            // Verifica se as notas são válidas
+            if (isNaN(n1) || isNaN(n2)) {
+                resultado.textContent = "Digite ambas as notas";
+                resultado.className = "invalido";
+                return;
+            }
+            
+            // Verifica se as notas estão entre 0 e 10
+            if (n1 < 0 || n1 > 10 || n2 < 0 || n2 > 10) {
+                resultado.textContent = "As notas devem estar entre 0 e 10";
+                resultado.className = "invalido";
+                return;
+            }
+            
+            const situacao = calcularMediaSimples(n1, n2);
+            const media = (n1 + n2) / 2;
+            
+            resultado.innerHTML = `
+                <div>Média: <strong>${media.toFixed(1)}</strong></div>
+                <div>Situação: <strong>${situacao}</strong></div>
+            `;
+            
+            if (situacao === "Aprovado") {
+                resultado.className = "aprovado";
+            } else {
+                resultado.className = "reprovado";
+            }
+        }
+        
+        // Enter para calcular
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calcularMedia();
+            }
+        });
+    </script>
+</body>
+</html>

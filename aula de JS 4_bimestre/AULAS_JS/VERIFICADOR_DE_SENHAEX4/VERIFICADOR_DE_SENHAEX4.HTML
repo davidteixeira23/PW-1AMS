@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Senha Forte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        
+        .forte {
+            background-color: #E8F5E8;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+        
+        .fraca {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+        
+        .info {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Verificador de Senha Forte</h2>
+    
+    <input type="password" id="senha" placeholder="Digite sua senha">
+    <button onclick="verificarSenha()">Verificar Senha</button>
+    
+    <div class="info">
+        <strong>Critérios para senha forte:</strong>
+        <ul>
+            <li>Mais de 8 caracteres</li>
+            <li>Diferente de "12345678"</li>
+        </ul>
+    </div>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function senhaForte(senha) {
+            return senha.length > 8 && senha !== "12345678";
+        }
+        
+        function verificarSenha() {
+            const senha = document.getElementById('senha').value;
+            const resultado = document.getElementById('resultado');
+            
+            if (senhaForte(senha)) {
+                resultado.textContent = "✅ Senha Forte! Atende aos critérios.";
+                resultado.className = "forte";
+            } else {
+                resultado.textContent = "❌ Senha Fraca! Não atende aos critérios.";
+                resultado.className = "fraca";
+            }
+        }
+        
+        // Enter para verificar
+        document.getElementById('senha').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verificarSenha();
+            }
+        });
+    </script>
+</body>
+</html>

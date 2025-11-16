@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maior entre Três</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 8px;
+            margin: 5px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Maior entre Três Números</h2>
+    
+    <input type="number" id="numero1" placeholder="Primeiro número">
+    <input type="number" id="numero2" placeholder="Segundo número">
+    <input type="number" id="numero3" placeholder="Terceiro número">
+    
+    <button onclick="encontrarMaior()">Verificar</button>
+    <button onclick="limpar()">Limpar</button>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function encontrarMaiorEntreTres(a, b, c) {
+            if (a > b && a > c) {
+                return a;
+            } else if (b > a && b > c) {
+                return b;
+            } else {
+                return c;
+            }
+        }
+        
+        function encontrarMaior() {
+            const num1 = parseFloat(document.getElementById('numero1').value);
+            const num2 = parseFloat(document.getElementById('numero2').value);
+            const num3 = parseFloat(document.getElementById('numero3').value);
+            
+            if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+                alert("Digite três números válidos");
+                return;
+            }
+            
+            const maior = encontrarMaiorEntreTres(num1, num2, num3);
+            document.getElementById('resultado').textContent = `Maior número: ${maior}`;
+        }
+        
+        function limpar() {
+            document.getElementById('numero1').value = '';
+            document.getElementById('numero2').value = '';
+            document.getElementById('numero3').value = '';
+            document.getElementById('resultado').textContent = '';
+        }
+    </script>
+</body>
+</html>

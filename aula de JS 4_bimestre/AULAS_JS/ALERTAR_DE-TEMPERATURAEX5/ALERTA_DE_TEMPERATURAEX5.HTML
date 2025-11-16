@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerta de Temperatura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+        
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        
+        .frio {
+            background-color: #E3F2FD;
+            color: #1565C0;
+            border: 2px solid #2196F3;
+        }
+        
+        .ideal {
+            background-color: #E8F5E8;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+        
+        .calor {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+        
+        .info {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Alerta de Temperatura</h2>
+    <p>Digite a temperatura em °C</p>
+    
+    <input type="number" id="temperatura" placeholder="Ex: 15, -5, 30">
+    <button onclick="verificarTemperatura()">Verificar Temperatura</button>
+    
+    <div class="info">
+        <strong>Classificação:</strong><br>
+        ❄️ Abaixo de 10°C → Alerta de Frio<br>
+        🌡️ Entre 10°C e 25°C → Temperatura Ideal<br>
+        🔥 Acima de 25°C → Alerta de Calor
+    </div>
+    
+    <div id="resultado"></div>
+
+    <script>
+        function checarTemperatura(temperatura) {
+            if (temperatura < 10) {
+                return "Alerta de Frio";
+            } else if (temperatura >= 10 && temperatura <= 25) {
+                return "Temperatura Ideal";
+            } else {
+                return "Alerta de Calor";
+            }
+        }
+        
+        function verificarTemperatura() {
+            const temp = parseFloat(document.getElementById('temperatura').value);
+            const resultado = document.getElementById('resultado');
+            
+            if (isNaN(temp)) {
+                resultado.textContent = "Digite uma temperatura válida";
+                return;
+            }
+            
+            const alerta = checarTemperatura(temp);
+            resultado.textContent = `${alerta} (${temp}°C)`;
+            
+            if (alerta === "Alerta de Frio") {
+                resultado.className = "frio";
+            } else if (alerta === "Temperatura Ideal") {
+                resultado.className = "ideal";
+            } else {
+                resultado.className = "calor";
+            }
+        }
+        
+        // Enter para verificar
+        document.getElementById('temperatura').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verificarTemperatura();
+            }
+        });
+    </script>
+</body>
+</html>
