@@ -1,0 +1,221 @@
+/* Estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.cabecalho h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.cabecalho p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.aluno {
+    font-weight: bold;
+    color: #ecf0f1;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Introdução */
+.introducao {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.introducao h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+/* Carrossel */
+.carrossel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.carrossel {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    position: relative;
+}
+
+.slide-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.texto-slide {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+}
+
+.texto-slide h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.texto-slide p {
+    font-size: 16px;
+    color: #ddd;
+}
+
+/* Botões */
+.btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.btn:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+/* Pontos de navegação */
+.pontos {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.ponto {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+}
+
+.ponto.ativo {
+    background: white;
+}
+
+/* Informações do trabalho  (ainda quero acrescentar)*/
+.info-trabalho {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info-trabalho h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.info-trabalho p {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* Rodapé (futuro footer*/
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #7f8c8d;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+}
+
+footer p {
+    margin-bottom: 5px;
+}
+
+/* Responsivo  (responsividade geral)*/
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .cabecalho h1 {
+        font-size: 22px;
+    }
+    
+    .slide img {
+        height: 300px;
+    }
+    
+    .texto-slide h3 {
+        font-size: 20px;
+    }
+    
+    .btn {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
